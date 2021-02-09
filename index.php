@@ -57,6 +57,12 @@
             $err["comentario"] = "Has introducido más de 300 carácteres";
         }
 
+        //si existe la cookie no puedo volver a postear
+
+        if(isset($_COOKIE["refract"])){
+            $err["comentarioRefract"] = "Has de esperar 10 segundos para volver a comentar";
+        }
+
         return $err;
 
     }
@@ -82,6 +88,10 @@
 
             $comentario = "";
 
+            //creo una cookie que dure 10 segundos y si existe no me deja volver a comentar
+
+            setcookie("refract","10s",time()+10);
+
         }
 
     }
@@ -106,6 +116,9 @@
         echo "<textarea rows='5' name='comentario'>" . $comentario . "</textarea>";
         if(isset($err["comentario"])){
             echo "<p class='red'>" . $err["comentario"] . "</p>";
+        }
+        if(isset($err["comentarioRefract"])){
+            echo "<p class='red'>" . $err["comentarioRefract"] . "</p>";
         }
         echo "<input type='submit' value='Enviar' name='enviar'>";
         echo "</form>";

@@ -129,6 +129,42 @@ class usuario{
 
     }
 
+    public static function cambio_nombre($id,$nombre){
+
+        $conectar = conexion::abrir_conexion();
+
+        try{
+
+            $result = $conectar->query("Update usuarios set nombre = '$nombre' where id_usr = $id");
+
+        } catch (exception $e){
+
+            die("Error: " . $e->getMessage());
+
+        }
+
+        $conectar = conexion::cerrar_conexion();
+
+    }
+
+    public static function cambio_contraseña($id,$contraseña){
+
+        $conectar = conexion::abrir_conexion();
+
+        try{
+
+            $result = $conectar->query("Update usuarios set pass = '$contraseña' where id_usr = $id");
+
+        } catch (exception $e){
+
+            die("Error: " . $e->getMessage());
+
+        }
+
+        $conectar = conexion::cerrar_conexion();
+
+    }
+
 }
 
 ?>
